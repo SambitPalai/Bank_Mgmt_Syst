@@ -2,11 +2,13 @@ package bank.management.system;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.util.*; // it contains the random class "Random ram = new Random();"
 import com.toedter.calendar.JDateChooser;
 
-public class SignupOne extends JFrame {
+public class SignupOne extends JFrame implements ActionListener {
 
+    long random;
     JTextField nameTextField,fnameTextField , emailTextField,addressTextField,cityTextField,pinTextField,stateTextField;
     JRadioButton male ,female ,married ,unmarried, other;
     JDateChooser dateChooser;
@@ -24,7 +26,7 @@ public class SignupOne extends JFrame {
         Random ram = new Random();
 /*  (Math.abs(ram.nextLong() % 9000L ) + 1000L) this line generates 4 digit positive random no
     and to ignore to get random negative we used Math.abs */
-        long random = (Math.abs(ram.nextLong() % 9000L ) + 1000L);
+        random = (Math.abs(ram.nextLong() % 9000L ) + 1000L);
         JLabel formno = new JLabel("APPLICATION FORM NO. "+random);
         formno.setFont(new Font ("Raleway",Font.BOLD,38));
         formno.setBounds(135,20,600,40);
@@ -73,12 +75,16 @@ public class SignupOne extends JFrame {
         male.setBounds(300,290,80,25);
         female = new JRadioButton("Female");
         female.setBounds(390,290,80,25);
+        other = new JRadioButton("Other");
+        other.setBounds(480,290,80,25);
         // Group is made to choose one option and prevents accidental choosing both options .
         ButtonGroup genderGroup = new ButtonGroup();
         genderGroup.add(male);
         genderGroup.add(female);
+        genderGroup.add(other);
         add(male);
         add(female);
+        add(other);
 
 //  For Email Address
         JLabel email = new JLabel("Email Address : ");
@@ -99,16 +105,12 @@ public class SignupOne extends JFrame {
         married.setBounds(300,390,90,25);
         unmarried = new JRadioButton("Unmarried");
         unmarried.setBounds(400,390,90,25);
-        other = new JRadioButton("Other");
-        other.setBounds(500,390,90,25);
         // Group is made to choose one option and prevents accidental choosing both options .
         ButtonGroup martialstat = new ButtonGroup();
         martialstat.add(married);
         martialstat.add(unmarried);
-        martialstat.add(other);
         add(married);
         add(unmarried);
-        add(other);
 
 //  For address
         JLabel address = new JLabel("Adderss : ");
@@ -153,11 +155,54 @@ public class SignupOne extends JFrame {
         next.setFont(new Font("Raleway",Font.BOLD,14));
         next.setBackground(Color.BLACK);
         next.setForeground(Color.WHITE);
+        next.addActionListener(this); // action listener for Next button .
         add(next);
 
         setSize(850,800);
         setLocation(350,10);
         setVisible(true);
+
+    }
+
+    public void actionPerformed(ActionEvent ae){
+        String formno = ""+random;
+        String name = nameTextField.getText();
+        String fname = nameTextField.getText();
+        String dob = ((JTextField)dateChooser.getDateEditor().getUiComponent()).getToolTipText();
+        String gender = null;
+        if(male.isSelected()){
+            gender = "Male";
+        }
+        else if(female.isSelected()){
+            gender = "Female";
+        }
+        String email = emailTextField.getText();
+        String mstat = null;
+        if(married.isSelected()){
+            mstat = "Married";
+        }
+        else if(unmarried.isSelected()){
+            mstat = "Unmarried";
+        } else if (other.isSelected()) {
+            mstat = "Other";
+        }
+        String address = addressTextField.getText();
+        String city = cityTextField.getText();
+        String pin = pinTextField.getText();
+        String state = stateTextField.getText();
+
+        try{
+           if(name.equals("")){
+               JOptionPane.showMessageDialog(null,"Name is required");
+           }
+           else{
+               Conn c = new Conn();
+               String query = "insert into signup value ('"+formno+"','"+name+"','"+fname+"','"+dob+"','"+gender+"','"+email+"','"+mstat+"','"+address+"','"+city+"','"+pin+"','"+state+"')";
+               c.s.executeUpdate(query);
+           }
+        }catch(Exception e){
+            System.out.println(e);
+        }
 
     }
 
