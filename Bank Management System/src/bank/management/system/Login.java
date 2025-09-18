@@ -58,7 +58,7 @@ public class Login extends JFrame implements ActionListener {
         add(pinTextField);
 
 //17. For Login
-/*It can be written as "JButton login = new JButton("Login");"
+/*It can be written as " JButton login = new JButton("Login");"
    but as it is globally defined therefore we write
     "login = new JButton("Login");" */
         login = new JButton("Login");

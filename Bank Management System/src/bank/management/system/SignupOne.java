@@ -19,7 +19,7 @@ public class SignupOne extends JFrame implements ActionListener {
 /*  Never forget to set the layout of the JLabel to null because
     in default the format will be center aligned and changes can't be done . */
         setLayout(null);
-
+        setTitle("NEW ACCOUNT APPLICATION FORM - PAGE 1");
         getContentPane().setBackground(Color.WHITE);
 
 // IT IS FOR THE HEADING "APPLICATION FORM NO.( RANDOM NUMBER )"
@@ -63,7 +63,7 @@ public class SignupOne extends JFrame implements ActionListener {
         add(dob);
         dateChooser = new JDateChooser();
         dateChooser.setBounds(300,240,300,25);
-        dateChooser.setForeground(new Color(0,0,0));
+        dateChooser.setForeground(new Color(0, 0, 0));
         add(dateChooser);
 
 //  For Gender
@@ -167,14 +167,16 @@ public class SignupOne extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae){
         String formno = ""+random;
         String name = nameTextField.getText();
-        String fname = nameTextField.getText();
-        String dob = ((JTextField)dateChooser.getDateEditor().getUiComponent()).getToolTipText();
+        String fname = fnameTextField.getText();
+        String dob = ((JTextField)dateChooser.getDateEditor().getUiComponent()).getText();
         String gender = null;
         if(male.isSelected()){
             gender = "Male";
         }
         else if(female.isSelected()){
             gender = "Female";
+        }else if (other.isSelected()) {
+            gender = "Other";
         }
         String email = emailTextField.getText();
         String mstat = null;
@@ -183,8 +185,6 @@ public class SignupOne extends JFrame implements ActionListener {
         }
         else if(unmarried.isSelected()){
             mstat = "Unmarried";
-        } else if (other.isSelected()) {
-            mstat = "Other";
         }
         String address = addressTextField.getText();
         String city = cityTextField.getText();
@@ -197,8 +197,12 @@ public class SignupOne extends JFrame implements ActionListener {
            }
            else{
                Conn c = new Conn();
-               String query = "insert into signup value ('"+formno+"','"+name+"','"+fname+"','"+dob+"','"+gender+"','"+email+"','"+mstat+"','"+address+"','"+city+"','"+pin+"','"+state+"')";
-               c.s.executeUpdate(query);
+               String query1 = "insert into signupone values ('"+formno+"','"+name+"','"+fname+"','"+dob+"','"+gender+"','"+email+"','"+mstat+"','"+address+"','"+city+"','"+pin+"','"+state+"')";
+               c.s.executeUpdate(query1);
+
+               setVisible(false);
+               new SignupTwo(formno).setVisible(true);
+
            }
         }catch(Exception e){
             System.out.println(e);
