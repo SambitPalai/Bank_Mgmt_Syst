@@ -1,8 +1,12 @@
 package bank.management.system;
 
+import com.mysql.cj.protocol.Resultset;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.*;
+import java.util.Arrays;
 
 public class Login extends JFrame implements ActionListener {
 
@@ -103,8 +107,31 @@ public class Login extends JFrame implements ActionListener {
             cardTextField.setText("");
             pinTextField.setText("");
         } else if (ae.getSource()==login) {
-            
-        } else if (ae.getSource()==signup) {
+            setVisible(false);
+            Conn conn = new Conn();
+            String cardnumber = cardTextField.getText();
+            char[] pinnumber = pinTextField.getPassword();
+            String pinStr = new String(pinnumber);
+            String query = "select * from login where cardNumber='"+cardnumber+"' and pinNumber='"+pinStr+"'";
+         // Clear the array after use
+            Arrays.fill(pinnumber, '0');
+            pinStr = null;
+
+            try{
+                ResultSet rs = conn.s.executeQuery(query);
+                if(rs.next()){ // if password(pin) matches then, open the transaction page .
+                    setVisible(false);
+                    new Transactions().setVisible(true);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Incorrect Card Number or PIN");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+        }
+        else if (ae.getSource()==signup) {
             setVisible(false);  // when signup button is pressed it closes the login page
             new SignupOne().setVisible(true); // this opens up the signup page
         }
