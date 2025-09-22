@@ -12,6 +12,7 @@ public class SignupThree extends JFrame implements ActionListener {
     JButton submit,cancel;
     JCheckBox c1,c2,c3,c4,c5,c6,c7 ;
     String formno;
+    String cardNumber;
 
     SignupThree(String formno) {
 
@@ -164,8 +165,10 @@ public class SignupThree extends JFrame implements ActionListener {
 
             Random random = new Random();
             //to generate Random Card Number
-            String cardNumber = ""+Math.abs((random.nextLong()%90000000L)+5040936000000000L);
-            //to generate Random Card Number
+            cardNumber = "";
+            for (int i=0;i<16;i++){
+                cardNumber += random.nextInt(10);
+            }
             String pinNumber=""+Math.abs((random.nextLong()%9000L)+1000L);
             //For services for the Check Boxes .
             String services = "";
@@ -202,6 +205,10 @@ public class SignupThree extends JFrame implements ActionListener {
                 c.s.executeUpdate(query4);
 
                 JOptionPane.showMessageDialog(null,"Your Card Number :"+cardNumber+"\n Your Pin Number:"+pinNumber);
+
+                setVisible(false);
+                new Deposit(cardNumber).setVisible(true);
+
             }
         }
         catch(Exception e){
@@ -211,7 +218,8 @@ public class SignupThree extends JFrame implements ActionListener {
         }
 
         else if (ae.getSource() == cancel) {
-
+            setVisible(false);
+            new Login().setVisible(true);
         }
     }
 

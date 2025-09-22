@@ -106,13 +106,14 @@ public class Login extends JFrame implements ActionListener {
         if (ae.getSource()==clear){
             cardTextField.setText("");
             pinTextField.setText("");
-        } else if (ae.getSource()==login) {
+        }
+        else if (ae.getSource()==login) {
             setVisible(false);
             Conn conn = new Conn();
             String cardnumber = cardTextField.getText();
             char[] pinnumber = pinTextField.getPassword();
             String pinStr = new String(pinnumber);
-            String query = "select * from login where cardNumber='"+cardnumber+"' and pinNumber='"+pinStr+"'";
+            String query = "select * from login where cardNumber='"+cardnumber+"' and pinNumber='"+pinStr+"'"; // cardNumber and pinNumber is from mysql table.
          // Clear the array after use
             Arrays.fill(pinnumber, '0');
             pinStr = null;
@@ -121,7 +122,7 @@ public class Login extends JFrame implements ActionListener {
                 ResultSet rs = conn.s.executeQuery(query);
                 if(rs.next()){ // if password(pin) matches then, open the transaction page .
                     setVisible(false);
-                    new Transactions().setVisible(true);
+                    new Transactions(cardnumber).setVisible(true);
                 }
                 else{
                     JOptionPane.showMessageDialog(null,"Incorrect Card Number or PIN");

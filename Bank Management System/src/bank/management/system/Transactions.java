@@ -8,9 +8,15 @@ import java.awt.event.ActionListener;
 public class Transactions extends JFrame implements ActionListener {
 
     JButton deposit,withdrawal,fastCash,miniStmt,pinChange,balanceEnquiry,exit;
+    String cardNumber;
 
-    Transactions() {
+    Transactions(String cardNumber) {
+        this.cardNumber=cardNumber;
 
+/* We can directly set bounds to image but we went so far to change the image into object and convert it to certain scale to scale up the actual image
+and then apply it on the JLabel jsut to maintain the image its like
+    There is a Pizza(Image) in short way you are stretching it so it won't remain the same the pizza will get thin and get torn (like pixels)
+     but if I enlarge the pizza(Image) there will be no major alterations and it will be in good condition .*/
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/atm.jpg"));
         Image i2 = i1.getImage().getScaledInstance(900,900,Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
@@ -71,11 +77,16 @@ public class Transactions extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae){
         if(ae.getSource() == exit){ // if button pressed exits the page
             System.exit(0);
+        } else if (ae.getSource() == deposit) {
+            setVisible(false);
+            new Deposit(cardNumber).setVisible(true);
+            // Just a debug line to check wether transactions class the cardNumber or not .
+            System.out.println("Transactions cardNumber = " + this.cardNumber);
         }
 
     }
 
     public static void main(String[] args) {
-        new Transactions();
+        new Transactions("");
     }
 }
