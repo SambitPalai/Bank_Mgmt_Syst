@@ -108,7 +108,6 @@ public class Login extends JFrame implements ActionListener {
             pinTextField.setText("");
         }
         else if (ae.getSource()==login) {
-            setVisible(false);
             Conn conn = new Conn();
             String cardnumber = cardTextField.getText();
             char[] pinnumber = pinTextField.getPassword();

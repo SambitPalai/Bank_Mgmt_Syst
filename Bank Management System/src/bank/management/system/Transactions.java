@@ -80,8 +80,15 @@ and then apply it on the JLabel jsut to maintain the image its like
         } else if (ae.getSource() == deposit) {
             setVisible(false);
             new Deposit(cardNumber).setVisible(true);
-            // Just a debug line to check wether transactions class the cardNumber or not .
+            // Just a debug line to check whether transactions class the cardNumber or not .
             System.out.println("Transactions cardNumber = " + this.cardNumber);
+        } else if(ae.getSource() == withdrawal) {
+            setVisible(false);
+            new Withdraw(cardNumber).setVisible(true);
+            System.out.println("Transactions cardNumber = " + this.cardNumber);
+        } else if (ae.getSource() == fastCash) {
+            setVisible(false);
+            new FastCash(cardNumber).setVisible(true);
         }
 
     }
