@@ -10,8 +10,10 @@ public class Transactions extends JFrame implements ActionListener {
     JButton deposit,withdrawal,fastCash,miniStmt,pinChange,balanceEnquiry,exit;
     String cardNumber;
 
+
     Transactions(String cardNumber) {
         this.cardNumber=cardNumber;
+
 
 /* We can directly set bounds to image but we went so far to change the image into object and convert it to certain scale to scale up the actual image
 and then apply it on the JLabel jsut to maintain the image its like
@@ -89,6 +91,9 @@ and then apply it on the JLabel jsut to maintain the image its like
         } else if (ae.getSource() == fastCash) {
             setVisible(false);
             new FastCash(cardNumber).setVisible(true);
+        } else if (ae.getSource() == pinChange) {
+            setVisible(false);
+            new pinChange(cardNumber).setVisible(true);
         }
 
     }

@@ -1,6 +1,7 @@
 package bank.management.system;
 
 import javax.swing.*;
+import javax.swing.plaf.SpinnerUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +16,7 @@ public class FastCash extends JFrame implements ActionListener {
     FastCash(String cardNumber) {
         this.cardNumber=cardNumber;
 
+
 /* We can directly set bounds to image but we went so far to change the image into object and convert it to certain scale to scale up the actual image
 and then apply it on the JLabel jsut to maintain the image its like
     There is a Pizza(Image) in short way you are stretching it so it won't remain the same the pizza will get thin and get torn (like pixels)
@@ -27,7 +29,7 @@ and then apply it on the JLabel jsut to maintain the image its like
         add(image);
 
         JLabel text = new JLabel("Select Withdrawal Amount");
-        text.setBounds(215,300,700,35);
+        text.setBounds(240,330,700,35);
         text.setForeground(Color.WHITE);
         text.setFont(new Font("System",Font.BOLD,16));
         image.add(text);

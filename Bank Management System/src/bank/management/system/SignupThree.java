@@ -12,7 +12,7 @@ public class SignupThree extends JFrame implements ActionListener {
     JButton submit,cancel;
     JCheckBox c1,c2,c3,c4,c5,c6,c7 ;
     String formno;
-    String cardNumber;
+    String pinNumber, cardNumber;
 
     SignupThree(String formno) {
 
@@ -169,7 +169,7 @@ public class SignupThree extends JFrame implements ActionListener {
             for (int i=0;i<16;i++){
                 cardNumber += random.nextInt(10);
             }
-            String pinNumber=""+Math.abs((random.nextLong()%9000L)+1000L);
+            pinNumber=""+Math.abs((random.nextLong()%9000L)+1000L);
             //For services for the Check Boxes .
             String services = "";
             if(c1.isSelected()){
