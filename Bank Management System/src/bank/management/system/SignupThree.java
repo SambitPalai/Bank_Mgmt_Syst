@@ -170,27 +170,33 @@ public class SignupThree extends JFrame implements ActionListener {
                 cardNumber += random.nextInt(10);
             }
             pinNumber=""+Math.abs((random.nextLong()%9000L)+1000L);
+
             //For services for the Check Boxes .
             String services = "";
             if(c1.isSelected()){
-                services = services+"ATM Card";
+                services = services+"ATM Card,";
             }
-            else if(c2.isSelected()){
-                services = services+"Mobile Banking";
+            if(c2.isSelected()){
+                services = services+"Mobile Banking,";
             }
-            else if(c3.isSelected()){
-                services = services+"Cheque Book";
+            if(c3.isSelected()){
+                services = services+"Cheque Book,";
             }
-            else if(c4.isSelected()){
-                services = services+"Internet Banking";
+            if(c4.isSelected()){
+                services = services+"Internet Banking,";
             }
-            else if(c5.isSelected()){
-                services = services+"E-mail and SMS alerts";
+            if(c5.isSelected()){
+                services = services+"E-mail and SMS alerts,";
             }
-            else if(c6.isSelected()){
-                services = services+"E-Statement";
+            if(c6.isSelected()){
+                services = services+"E-Statement,";
             }
-
+           /*It does NOT remove commas between the options.
+            "Option1,Option2" → the comma inside remains intact.
+            It only removes the extra comma at the very end to avoid issues when storing or splitting later.  "Option1,Option2," ->  "Option1,Option2" */
+            if(services.endsWith(",")) {
+                services = services.substring(0, services.length() - 1);
+            }
 
 
         try{
