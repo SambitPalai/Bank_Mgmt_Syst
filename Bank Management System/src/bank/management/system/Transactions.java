@@ -4,15 +4,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
 
 public class Transactions extends JFrame implements ActionListener {
 
     JButton deposit,withdrawal,fastCash,miniStmt,pinChange,balanceEnquiry,exit;
     String cardNumber;
-
+    String msg;
 
     Transactions(String cardNumber) {
         this.cardNumber=cardNumber;
+
+        LocalDateTime now = LocalDateTime.now();
+        int hour = now.getHour();
+        if(hour >= 4 && hour <= 12 ){
+            msg="GOOD MORNING !";
+        }
+        else if (hour >= 12 && hour <=17){
+            msg="GOOD AFTERNOON !";
+        }
+        else {
+            msg="GOOD EVENING !";
+        }
 
 
 /* We can directly set bounds to image but we went so far to change the image into object and convert it to certain scale to scale up the actual image
@@ -26,8 +39,14 @@ and then apply it on the JLabel jsut to maintain the image its like
         image.setBounds(0,0,900,900);
         add(image);
 
-        JLabel text = new JLabel("Please select your Transactions");
-        text.setBounds(215,300,700,35);
+        JLabel time = new JLabel(msg);
+        time.setBounds(255,300,700,35);
+        time.setForeground(Color.WHITE);
+        time.setFont(new Font("Raleway",Font.BOLD,15));
+        image.add(time);
+
+        JLabel text = new JLabel("How can we help you with ?");
+        text.setBounds(225,350,700,35);
         text.setForeground(Color.WHITE);
         text.setFont(new Font("System",Font.BOLD,16));
         image.add(text);
@@ -94,6 +113,11 @@ and then apply it on the JLabel jsut to maintain the image its like
         } else if (ae.getSource() == pinChange) {
             setVisible(false);
             new pinChange(cardNumber).setVisible(true);
+        } else if (ae.getSource() == balanceEnquiry) {
+            setVisible(false);
+            new BalanceEnquiry(cardNumber).setVisible(true);
+        }else if (ae.getSource() == miniStmt){
+            new MiniStatement(cardNumber).setVisible(true);
         }
 
     }

@@ -14,7 +14,7 @@ public class Login extends JFrame implements ActionListener {
     JPasswordField pinTextField;
 //Constructor
     Login(){
-        setTitle("💲💲 AUTOMATED TELLER MACHINE 💲💲");//5. sets title of the interface.
+        setTitle("WELCOME TO PERSONAL BANK");//5. sets title of the interface.
 
 /* 12. Setting layout to null to use or custom layout i.e.
        label.setBounds(70,10,100,100); or text.setBounds(90,40,90,90); */
@@ -32,8 +32,8 @@ public class Login extends JFrame implements ActionListener {
         getContentPane().setBackground(Color.WHITE );
 
 //14. With the help of JLabel you can write anything on the frame.
-        JLabel text = new JLabel(" WELCOME TO ATM "); //Places JLabel (text)
-        text.setBounds(270,110,400,40); //sets JLabel (text) location
+        JLabel text = new JLabel(" WELCOME TO PERSONAL BANK "); //Places JLabel (text)
+        text.setBounds(200,110,500,40); //sets JLabel (text) location
         add(text);//places JLabel (text) on the frame
         text.setFont(new Font("Times New Roman", Font.BOLD, 28));
 

@@ -1,7 +1,6 @@
 package bank.management.system;
 
 import javax.swing.*;
-import javax.swing.plaf.SpinnerUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +17,7 @@ public class FastCash extends JFrame implements ActionListener {
 
 
 /* We can directly set bounds to image but we went so far to change the image into object and convert it to certain scale to scale up the actual image
-and then apply it on the JLabel jsut to maintain the image its like
+and then apply it on the JLabel just to maintain the image its like
     There is a Pizza(Image) in short way you are stretching it so it won't remain the same the pizza will get thin and get torn (like pixels)
      but if I enlarge the pizza(Image) there will be no major alterations and it will be in good condition .*/
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/atm.jpg"));
@@ -59,7 +58,7 @@ and then apply it on the JLabel jsut to maintain the image its like
         v5.addActionListener(this);
         image.add(v5);
 
-        v6  = new JButton("Rs 10,000");
+        v6  = new JButton("Rs 10000");
         v6.setBounds(355,485,150,30);
         v6.addActionListener(this);
         image.add(v6);
@@ -104,6 +103,7 @@ and then apply it on the JLabel jsut to maintain the image its like
                     return;
                 }
 
+                // Inserts date in the table
                 Date date = new Date();
                 String query = "insert into bank values('"+cardNumber+"','"+date+"','Withdrawal','"+amount+"')";
                 c.s.executeUpdate(query);
@@ -115,7 +115,6 @@ and then apply it on the JLabel jsut to maintain the image its like
                 System.out.println(e);
             }
         }
-
     }
 
     public static void main(String[] args) {
