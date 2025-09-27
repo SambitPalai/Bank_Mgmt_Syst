@@ -61,7 +61,6 @@ public class MiniStatement extends JFrame {
         add(scrollPane);
 
         // Shows Total Amount
-
         try{
             Conn c = new Conn();
             ResultSet rs = c.s.executeQuery("select * from bank where Acc_no ='"+cardNumber+"'");

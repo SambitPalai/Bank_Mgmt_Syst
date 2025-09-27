@@ -5,12 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
+import java.sql.*;
 
 public class Transactions extends JFrame implements ActionListener {
 
     JButton deposit,withdrawal,fastCash,miniStmt,pinChange,balanceEnquiry,exit;
     String cardNumber;
-    String msg;
+    String msg,name;
 
     Transactions(String cardNumber) {
         this.cardNumber=cardNumber;
@@ -26,6 +27,17 @@ public class Transactions extends JFrame implements ActionListener {
         else {
             msg="GOOD EVENING !";
         }
+
+        try{
+            Conn c = new Conn();
+            ResultSet rs = c.s.executeQuery("select s1.name from signupone s1 join signupthree s3 on s1.formno = s3.formno where s3.cardNumber = '"+cardNumber+"' ");
+            while(rs.next()){
+                name=rs.getString("name");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
 
 
 /* We can directly set bounds to image but we went so far to change the image into object and convert it to certain scale to scale up the actual image
@@ -44,6 +56,12 @@ and then apply it on the JLabel jsut to maintain the image its like
         time.setForeground(Color.WHITE);
         time.setFont(new Font("Raleway",Font.BOLD,15));
         image.add(time);
+
+        JLabel nm = new JLabel(name);
+        nm.setBounds(260,320,700,35);
+        nm.setForeground(Color.WHITE);
+        nm.setFont(new Font("Raleway",Font.BOLD,15));
+        image.add(nm);
 
         JLabel text = new JLabel("How can we help you with ?");
         text.setBounds(225,350,700,35);
